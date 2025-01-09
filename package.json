@@ -36,5 +36,8 @@
 		"rimraf": "^6.0.1",
 		"ui5-middleware-livereload": "^3.0.3",
 		"wdio-ui5-service": "^2.0.10"
+	},
+	"dependencies": {
+		"http-proxy-middleware": "^3.0.3"
 	}
 }

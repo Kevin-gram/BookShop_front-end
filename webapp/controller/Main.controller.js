@@ -1,9 +1,19 @@
-sap.ui.define(["./BaseController", "sap/m/MessageBox"], function (BaseController, MessageBox) {
-	"use strict";
+sap.ui.define([
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/model/json/JSONModel"
+], function (Controller, JSONModel) {
+    "use strict";
 
-	return BaseController.extend("bookshop.controller.Main", {
-		sayHello: function () {
-			MessageBox.show("Hello World!");
-		}
-	});
+    return Controller.extend("bookshop.controller.Main", {
+        onInit: function () {
+            var oModel = new JSONModel();
+            this.getView().setModel(oModel);
+            this._fetchBooks();
+        },
+
+        _fetchBooks: function () {
+            var oModel = this.getView().getModel();
+            oModel.loadData("/odata/v4/catalog/Books");
+        }
+    });
 });
