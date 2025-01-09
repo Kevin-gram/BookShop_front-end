@@ -14,16 +14,29 @@
                 }">
                 <columns>
                     <Column>
-                        <Text text="Title" />
+                        <header>
+                            <Text text="Title" />
+                        </header>
                     </Column>
                     <Column>
-                        <Text text="Description" />
+                        <header>
+                            <Text text="Description" />
+                        </header>
                     </Column>
                     <Column>
-                        <Text text="Price" />
+                        <header>
+                            <Text text="Price" />
+                        </header>
                     </Column>
                     <Column>
-                        <Text text="Currency" />
+                        <header>
+                            <Text text="Currency" />
+                        </header>
+                    </Column>
+                    <Column>
+                        <header>
+                            <Text text="Action" />
+                        </header>
                     </Column>
                 </columns>
                 <items>
@@ -33,6 +46,7 @@
                             <Text text="{descr}" />
                             <Text text="{price}" />
                             <Text text="{currency_code}" />
+                            <Button text="Order" press="onOrderPress" />
                         </cells>
                     </ColumnListItem>
                 </items>
