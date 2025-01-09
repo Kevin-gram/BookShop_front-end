@@ -7,6 +7,7 @@
         title="Books"
         id="mainPage">
         <content>
+            <Button text="Create Book" press="onCreateBookPress" />
             <Table
                 id="booksTable"
                 items="{
@@ -71,6 +72,30 @@
         </beginButton>
         <endButton>
             <Button text="Cancel" press="onCancelOrder" />
+        </endButton>
+    </Dialog>
+
+    <Dialog
+        id="createBookDialog"
+        title="Create Book"
+        afterClose="onDialogClose">
+        <content>
+            <VBox>
+                <Label text="Title" />
+                <Input id="newBookTitle" />
+                <Label text="Description" />
+                <Input id="newBookDescription" />
+                <Label text="Price" />
+                <Input id="newBookPrice" type="Number" />
+                <Label text="Currency" />
+                <Input id="newBookCurrency" />
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="Create" press="onSubmitCreateBook" />
+        </beginButton>
+        <endButton>
+            <Button text="Cancel" press="onCancelCreateBook" />
         </endButton>
     </Dialog>
 </mvc:View>

@@ -61,6 +61,30 @@ sap.ui.define([
 
         onCancelOrder: function () {
             this._orderDialog.close();
+        },
+
+        onCreateBookPress: function () {
+            if (!this._createBookDialog) {
+                this._createBookDialog = this.byId("createBookDialog");
+            }
+            this._createBookDialog.open();
+        },
+
+        onSubmitCreateBook: function () {
+            var sTitle = this.byId("newBookTitle").getValue();
+            var sDescription = this.byId("newBookDescription").getValue();
+            var sPrice = this.byId("newBookPrice").getValue();
+            var sCurrency = this.byId("newBookCurrency").getValue();
+
+            // Here you can implement the logic to create a new book
+            // For demonstration, we will just show a message toast
+            MessageToast.show("Book created: " + sTitle);
+
+            this._createBookDialog.close();
+        },
+
+        onCancelCreateBook: function () {
+            this._createBookDialog.close();
         }
     });
 });
