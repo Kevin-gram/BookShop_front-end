@@ -44,7 +44,9 @@ sap.ui.define([
         },
 
         onDialogClose: function () {
-            this._orderDialog.close();
+            if (this._orderDialog) {
+                this._orderDialog.close();
+            }
         },
 
         onSubmitOrder: function () {
@@ -56,11 +58,15 @@ sap.ui.define([
             // For demonstration, we will just show a message toast
             MessageToast.show("Order placed for: " + oBook.title + " with quantity: " + sQuantity);
 
-            this._orderDialog.close();
+            if (this._orderDialog) {
+                this._orderDialog.close();
+            }
         },
 
         onCancelOrder: function () {
-            this._orderDialog.close();
+            if (this._orderDialog) {
+                this._orderDialog.close();
+            }
         },
 
         onCreateBookPress: function () {
@@ -76,15 +82,43 @@ sap.ui.define([
             var sPrice = this.byId("newBookPrice").getValue();
             var sCurrency = this.byId("newBookCurrency").getValue();
 
-            // Here you can implement the logic to create a new book
-            // For demonstration, we will just show a message toast
-            MessageToast.show("Book created: " + sTitle);
+            var oNewBook = {
+                title: sTitle,
+                descr: sDescription,
+                price: sPrice,
+                currency_code: sCurrency
+            };
 
-            this._createBookDialog.close();
+            fetch("http://localhost:4004/odata/v4/catalog/Books", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(oNewBook)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                MessageToast.show("Book created: " + data.title);
+                this._fetchBooks();  // Fetch the updated list of books
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+
+            if (this._createBookDialog) {
+                this._createBookDialog.close();
+            }
         },
 
         onCancelCreateBook: function () {
-            this._createBookDialog.close();
+            if (this._createBookDialog) {
+                this._createBookDialog.close();
+            }
         }
     });
 });
