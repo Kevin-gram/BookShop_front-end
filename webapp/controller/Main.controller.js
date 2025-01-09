@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel"
-], function (Controller, JSONModel) {
+    "sap/ui/model/json/JSONModel",
+    "sap/m/MessageToast"
+], function (Controller, JSONModel, MessageToast) {
     "use strict";
 
     return Controller.extend("bookshop.controller.Main", {
@@ -26,6 +27,16 @@ sap.ui.define([
                 .catch(error => {
                     console.error('There has been a problem with your fetch operation:', error);
                 });
+        },
+
+        onOrderPress: function (oEvent) {
+            var oItem = oEvent.getSource().getParent();
+            var oContext = oItem.getBindingContext();
+            var oBook = oContext.getObject();
+
+            // Here you can implement the logic to place an order
+            // For demonstration, we will just show a message toast
+            MessageToast.show("Order placed for: " + oBook.title);
         }
     });
 });
