@@ -89,7 +89,7 @@ sap.ui.define([
                 currency_code: sCurrency
             };
 
-            fetch("http://localhost:4004/odata/v4/catalog/Books", {
+            fetch("http://localhost:4004/odata/v4/admin/createBook", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
