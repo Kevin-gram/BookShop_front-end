@@ -53,4 +53,24 @@
             </Table>
         </content>
     </Page>
+
+    <Dialog
+        id="orderDialog"
+        title="Place Order"
+        afterClose="onDialogClose">
+        <content>
+            <VBox>
+                <Label text="Book Name" />
+                <Input id="bookName" value="{/selectedBook/title}" editable="false" />
+                <Label text="Quantity" />
+                <Input id="quantity" type="Number" />
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="Submit" press="onSubmitOrder" />
+        </beginButton>
+        <endButton>
+            <Button text="Cancel" press="onCancelOrder" />
+        </endButton>
+    </Dialog>
 </mvc:View>

@@ -34,9 +34,33 @@ sap.ui.define([
             var oContext = oItem.getBindingContext();
             var oBook = oContext.getObject();
 
+            var oModel = this.getView().getModel();
+            oModel.setProperty("/selectedBook", oBook);
+
+            if (!this._orderDialog) {
+                this._orderDialog = this.byId("orderDialog");
+            }
+            this._orderDialog.open();
+        },
+
+        onDialogClose: function () {
+            this._orderDialog.close();
+        },
+
+        onSubmitOrder: function () {
+            var oModel = this.getView().getModel();
+            var oBook = oModel.getProperty("/selectedBook");
+            var sQuantity = this.byId("quantity").getValue();
+
             // Here you can implement the logic to place an order
             // For demonstration, we will just show a message toast
-            MessageToast.show("Order placed for: " + oBook.title);
+            MessageToast.show("Order placed for: " + oBook.title + " with quantity: " + sQuantity);
+
+            this._orderDialog.close();
+        },
+
+        onCancelOrder: function () {
+            this._orderDialog.close();
         }
     });
 });
