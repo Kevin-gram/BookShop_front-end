@@ -124,7 +124,6 @@ sap.ui.define([
 
         onSubmitCreateBook: function () {
             var sTitle = this.byId("newBookTitle").getValue();
-            var sDescription = this.byId("newBookDescription").getValue();
             var sPrice = parseFloat(this.byId("newBookPrice").getValue());
             var sCurrency = this.byId("newBookCurrency").getValue();
             var sStock = parseInt(this.byId("newBookStock").getValue(), 10);
@@ -133,7 +132,6 @@ sap.ui.define([
 
             var oNewBook = {
                 title: sTitle,
-                descr: sDescription,
                 price: sPrice,
                 currency_code: sCurrency,
                 stock: sStock,
