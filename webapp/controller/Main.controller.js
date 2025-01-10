@@ -2,8 +2,10 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
-    "sap/ui/model/Sorter"
-], function (Controller, JSONModel, MessageToast, Sorter) {
+    "sap/ui/model/Sorter",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+], function (Controller, JSONModel, MessageToast, Sorter, Filter, FilterOperator) {
     "use strict";
 
     return Controller.extend("bookshop.controller.Main", {
@@ -87,7 +89,8 @@ sap.ui.define([
                 title: sTitle,
                 descr: sDescription,
                 price: sPrice,
-                currency_code: sCurrency
+                currency_code: sCurrency,
+                rating: 0  // Initialize rating to 0
             };
 
             fetch("http://localhost:4004/odata/v4/admin/createBook", {
@@ -123,17 +126,40 @@ sap.ui.define([
         },
 
         onSortByPrice: function () {
-            let  oTable = this.byId("booksTable");
-            let  oBinding = oTable.getBinding("items");
-            let  oSorter = new Sorter("price", false);  // Sort by price in ascending order
+            var oTable = this.byId("booksTable");
+            var oBinding = oTable.getBinding("items");
+            var oSorter = new Sorter("price", false);  // Sort by price in ascending order
             oBinding.sort(oSorter);
         },
 
         onSortByCurrency: function () {
-            let  oTable = this.byId("booksTable");
-            let  oBinding = oTable.getBinding("items");
-            let oSorter = new Sorter("currency_code", false);  // Sort by currency in ascending order
+            var oTable = this.byId("booksTable");
+            var oBinding = oTable.getBinding("items");
+            var oSorter = new Sorter("currency_code", false);  // Sort by currency in ascending order
             oBinding.sort(oSorter);
+        },
+
+        onSearch: function (oEvent) {
+            var sQuery = oEvent.getParameter("newValue");
+            var aFilters = [];
+            if (sQuery && sQuery.length > 0) {
+                aFilters.push(new Filter("title", FilterOperator.Contains, sQuery));
+            }
+            var oTable = this.byId("booksTable");
+            var oBinding = oTable.getBinding("items");
+            oBinding.filter(aFilters);
+        },
+
+        onRatingChange: function (oEvent) {
+            var oItem = oEvent.getSource().getParent().getParent();
+            var oContext = oItem.getBindingContext();
+            var oModel = this.getView().getModel();
+            var oBook = oContext.getObject();
+            var iRating = oEvent.getParameter("value");
+
+            // Update the rating in the model
+            oBook.rating = iRating;
+            oModel.refresh();
         }
     });
 });
