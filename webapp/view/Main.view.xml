@@ -53,7 +53,7 @@
                             <Text text="{title}" />
                             <HBox>
                                 <Text text="{path: 'descr', formatter: '.formatDescription'}" />
-                                <Button text="View More" press="onViewMorePress" />
+                                <Link text="View More" press="onViewMorePress" />
                             </HBox>
                             <Text text="{price}" />
                             <Text text="{currency_code}" />
