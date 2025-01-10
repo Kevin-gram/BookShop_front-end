@@ -91,6 +91,7 @@ sap.ui.define([
 
         onSubmitCreateBook: function () {
             var sTitle = this.byId("newBookTitle").getValue();
+            var sDescription = this.byId("newBookDescription").getValue();
             var sPrice = parseFloat(this.byId("newBookPrice").getValue());
             var sCurrency = this.byId("newBookCurrency").getValue();
             var sStock = parseInt(this.byId("newBookStock").getValue(), 10);
@@ -99,6 +100,7 @@ sap.ui.define([
 
             var oNewBook = {
                 title: sTitle,
+                descr: sDescription,
                 price: sPrice,
                 currency_code: sCurrency,
                 stock: sStock,
@@ -190,17 +192,17 @@ sap.ui.define([
             var oContext = oItem.getBindingContext();
             var oBook = oContext.getObject();
 
-            if (!this._viewMoreDialog) {
-                this._viewMoreDialog = this.byId("viewMoreDialog");
+            if (!this._descriptionPopover) {
+                this._descriptionPopover = this.byId("descriptionPopover");
             }
 
             this.byId("fullDescription").setText(oBook.descr);
-            this._viewMoreDialog.open();
+            this._descriptionPopover.openBy(oEvent.getSource());
         },
 
         onCloseViewMore: function () {
-            if (this._viewMoreDialog) {
-                this._viewMoreDialog.close();
+            if (this._descriptionPopover) {
+                this._descriptionPopover.close();
             }
         },
 
