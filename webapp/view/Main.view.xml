@@ -17,6 +17,9 @@
             <Button icon="sap-icon://sort" text="Sort by Currency" press="onSortByCurrency" />
             <Table
                 id="booksTable"
+                growing="true"
+                growingThreshold="10"
+                growingScrollToLoad="true"
                 items="{
                     path: '/value'
                 }">
@@ -115,17 +118,11 @@
         </endButton>
     </Dialog>
 
-    <Dialog
-        id="viewMoreDialog"
-        title="Description"
-        afterClose="onDialogClose">
+    <Popover
+        id="descriptionPopover"
+        title="Description">
         <content>
-            <VBox>
-                <Text id="fullDescription" />
-            </VBox>
+            <Text id="fullDescription" />
         </content>
-        <beginButton>
-            <Button text="Close" press="onCloseViewMore" />
-        </beginButton>
-    </Dialog>
+    </Popover>
 </mvc:View>
