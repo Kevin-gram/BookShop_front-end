@@ -51,12 +51,12 @@
                     <ColumnListItem>
                         <cells>
                             <Text text="{title}" />
-                            <Text text="{descr}" />
+                            <Text text="{path: 'descr', formatter: '.formatDescription'}" />
                             <Text text="{price}" />
                             <Text text="{currency_code}" />
                             <HBox justifyContent="SpaceBetween">
                              <RatingIndicator
-                                    maxValue="3"
+                                    maxValue="5"
                                     value="{rating}"
                                     liveChange="onRatingChange" />
                                 <Button text="Order" press="onOrderPress" />

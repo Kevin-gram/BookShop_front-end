@@ -160,6 +160,13 @@ sap.ui.define([
             // Update the rating in the model
             oBook.rating = iRating;
             oModel.refresh();
+        },
+
+        formatDescription: function (sDescription) {
+            if (sDescription && sDescription.length > 50) {
+                return sDescription.substring(0, 50) + "...";
+            }
+            return sDescription;
         }
     });
 });
