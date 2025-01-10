@@ -13,7 +13,8 @@ sap.ui.define([
             var oModel = new JSONModel({
                 value: [],
                 skip: 0,
-                limit: 10
+                limit: 10,
+                orderStatus: ""
             });
             this.getView().setModel(oModel);
             this._fetchBooks();
@@ -65,11 +66,43 @@ sap.ui.define([
         onSubmitOrder: function () {
             var oModel = this.getView().getModel();
             var oBook = oModel.getProperty("/selectedBook");
-            var sQuantity = this.byId("quantity").getValue();
+            var sQuantity = parseInt(this.byId("quantity").getValue(), 10);
 
-            // Here you can implement the logic to place an order
-            // For demonstration, we will just show a message toast
-            MessageToast.show("Order placed for: " + oBook.title + " with quantity: " + sQuantity);
+            var oOrder = {
+                items: [
+                    {
+                        book: oBook.ID,
+                        quantity: sQuantity
+                    }
+                ]
+            };
+
+            // Log the request data to the console
+            console.log("Order request data:", oOrder);
+
+            fetch("http://localhost:3000/api/odata/v4/catalog/submitOrder", {  // Use proxy server
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(oOrder)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                MessageToast.show("Order placed successfully!");
+                oModel.setProperty("/orderStatus", "Order placed successfully!");
+                this._resetBooks();  // Reset the book list and fetch from the beginning
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+                MessageToast.show("Order failed!");
+                oModel.setProperty("/orderStatus", "Order failed!");
+            });
 
             if (this._orderDialog) {
                 this._orderDialog.close();
