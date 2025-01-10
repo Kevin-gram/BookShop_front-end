@@ -167,6 +167,25 @@ sap.ui.define([
                 return sDescription.substring(0, 50) + "...";
             }
             return sDescription;
+        },
+
+        onViewMorePress: function (oEvent) {
+            var oItem = oEvent.getSource().getParent().getParent();
+            var oContext = oItem.getBindingContext();
+            var oBook = oContext.getObject();
+
+            if (!this._viewMoreDialog) {
+                this._viewMoreDialog = this.byId("viewMoreDialog");
+            }
+
+            this.byId("fullDescription").setText(oBook.descr);
+            this._viewMoreDialog.open();
+        },
+
+        onCloseViewMore: function () {
+            if (this._viewMoreDialog) {
+                this._viewMoreDialog.close();
+            }
         }
     });
 });

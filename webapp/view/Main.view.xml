@@ -51,11 +51,14 @@
                     <ColumnListItem>
                         <cells>
                             <Text text="{title}" />
-                            <Text text="{path: 'descr', formatter: '.formatDescription'}" />
+                            <HBox>
+                                <Text text="{path: 'descr', formatter: '.formatDescription'}" />
+                                <Button text="View More" press="onViewMorePress" />
+                            </HBox>
                             <Text text="{price}" />
                             <Text text="{currency_code}" />
                             <HBox justifyContent="SpaceBetween">
-                             <RatingIndicator
+                                <RatingIndicator
                                     maxValue="5"
                                     value="{rating}"
                                     liveChange="onRatingChange" />
@@ -110,5 +113,19 @@
         <endButton>
             <Button text="Cancel" press="onCancelCreateBook" />
         </endButton>
+    </Dialog>
+
+    <Dialog
+        id="viewMoreDialog"
+        title="Description"
+        afterClose="onDialogClose">
+        <content>
+            <VBox>
+                <Text id="fullDescription" />
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="Close" press="onCloseViewMore" />
+        </beginButton>
     </Dialog>
 </mvc:View>
