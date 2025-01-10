@@ -6,73 +6,78 @@
     <Page
         title="BookShop"
         id="mainPage"
-        class="no-scrollbar">
+       >
         <content>
-            <SearchField
-                id="searchField"
-                placeholder="Search for books..."
-                liveChange="onSearch"
-                width="50%"
-                class="search" />
-            <Button text="Create Book" press="onCreateBookPress" />
-            <Button icon="sap-icon://sort" text="Sort by Price" press="onSortByPrice" />
-            <Button icon="sap-icon://sort" text="Sort by Currency" press="onSortByCurrency" />
-            <Table
-                id="booksTable"
-                growing="true"
-                growingThreshold="13"
-                growingScrollToLoad="true"
-                items="{
-                    path: '/value'
-                }">
-                <columns>
-                    <Column>
-                        <header>
-                            <Text text="Title" />
-                        </header>
-                    </Column>
-                    <Column>
-                        <header>
-                            <Text text="Description" />
-                        </header>
-                    </Column>
-                    <Column>
-                        <header>
-                            <Text text="Price" />
-                        </header>
-                    </Column>
-                    <Column>
-                        <header>
-                            <Text text="Currency" />
-                        </header>
-                    </Column>
-                    <Column>
-                        <header>
-                            <Text text="Action" />
-                        </header>
-                    </Column>
-                </columns>
-                <items>
-                    <ColumnListItem>
-                        <cells>
-                            <Text text="{title}" />
-                            <HBox>
-                                <Text text="{path: 'descr', formatter: '.formatDescription'}" />
-                                <Link text="View More" press="onViewMorePress" />
-                            </HBox>
-                            <Text text="{price}" />
-                            <Text text="{currency_code}" />
-                            <HBox justifyContent="SpaceBetween">
-                                <RatingIndicator
-                                    maxValue="5"
-                                    value="{rating}"
-                                    liveChange="onRatingChange" />
-                                <Button text="Order" press="onOrderPress" />
-                            </HBox>
-                        </cells>
-                    </ColumnListItem>
-                </items>
-            </Table>
+            <VBox
+                fitContainer="true"
+                >
+                <SearchField
+                    id="searchField"
+                    placeholder="Search for books..."
+                    liveChange="onSearch"
+                    width="50%" />
+                <HBox justifyContent="SpaceBetween">
+                    <Button text="Create Book" press="onCreateBookPress" />
+                    <Button icon="sap-icon://sort" text="Sort by Price" press="onSortByPrice" />
+                    <Button icon="sap-icon://sort" text="Sort by Currency" press="onSortByCurrency" />
+                </HBox>
+                <Table
+                    id="booksTable"
+                    growing="true"
+                    growingThreshold="13"
+                    growingScrollToLoad="true"
+                    items="{
+                        path: '/value'
+                    }">
+                    <columns>
+                        <Column>
+                            <header>
+                                <Text text="Title" />
+                            </header>
+                        </Column>
+                        <Column>
+                            <header>
+                                <Text text="Description" />
+                            </header>
+                        </Column>
+                        <Column>
+                            <header>
+                                <Text text="Price" />
+                            </header>
+                        </Column>
+                        <Column>
+                            <header>
+                                <Text text="Currency" />
+                            </header>
+                        </Column>
+                        <Column>
+                            <header>
+                                <Text text="Action" />
+                            </header>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{title}" />
+                                <HBox>
+                                    <Text text="{path: 'descr', formatter: '.formatDescription'}" />
+                                    <Link text="View More" press="onViewMorePress" />
+                                </HBox>
+                                <Text text="{price}" />
+                                <Text text="{currency_code}" />
+                                <HBox justifyContent="SpaceBetween">
+                                    <RatingIndicator
+                                        maxValue="5"
+                                        value="{rating}"
+                                        liveChange="onRatingChange" />
+                                    <Button text="Order" press="onOrderPress" />
+                                </HBox>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
         </content>
     </Page>
 
@@ -110,6 +115,12 @@
                 <Input id="newBookPrice" type="Number" />
                 <Label text="Currency" />
                 <Input id="newBookCurrency" />
+                <Label text="Stock" />
+                <Input id="newBookStock" type="Number" />
+                <Label text="Author ID" />
+                <Input id="newBookAuthorID" type="Number" />
+                <Label text="Genre ID" />
+                <Input id="newBookGenreID" type="Number" />
             </VBox>
         </content>
         <beginButton>

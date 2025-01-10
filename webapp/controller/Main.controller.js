@@ -24,7 +24,7 @@ sap.ui.define([
             var iSkip = oModel.getProperty("/skip");
             var iLimit = oModel.getProperty("/limit");
 
-            fetch(`http://localhost:4004/odata/v4/catalog/Books?$skip=${iSkip}&$top=${iLimit}`)  // Direct link to the backend service with pagination
+            fetch(`http://localhost:3000/api/odata/v4/catalog/Books?$skip=${iSkip}&$top=${iLimit}`)  // Use proxy server
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok ' + response.statusText);
@@ -91,19 +91,25 @@ sap.ui.define([
 
         onSubmitCreateBook: function () {
             var sTitle = this.byId("newBookTitle").getValue();
-            var sDescription = this.byId("newBookDescription").getValue();
-            var sPrice = this.byId("newBookPrice").getValue();
+            var sPrice = parseFloat(this.byId("newBookPrice").getValue());
             var sCurrency = this.byId("newBookCurrency").getValue();
+            var sStock = parseInt(this.byId("newBookStock").getValue(), 10);
+            var sAuthorID = parseInt(this.byId("newBookAuthorID").getValue(), 10);
+            var sGenreID = parseInt(this.byId("newBookGenreID").getValue(), 10);
 
             var oNewBook = {
                 title: sTitle,
-                descr: sDescription,
                 price: sPrice,
                 currency_code: sCurrency,
-                rating: 0  // Initialize rating to 0
+                stock: sStock,
+                author_ID: sAuthorID,
+                genre_ID: sGenreID
             };
 
-            fetch("http://localhost:4004/odata/v4/admin/createBook", {
+            // Log the request data to the console
+            console.log("Request data:", oNewBook);
+
+            fetch("http://localhost:3000/api/odata/v4/admin/createBook", {  // Use proxy server
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

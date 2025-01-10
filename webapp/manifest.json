@@ -33,7 +33,7 @@
                 "sap.m": {}
             }
         },
-		"resources": {
+        "resources": {
             "css": [
                 {
                     "uri": "css/style.css"
@@ -54,7 +54,7 @@
             },
             "": {
                 "type": "sap.ui.model.json.JSONModel",
-                "uri": "/odata/v4/catalog/Books",
+                "uri": "http://localhost:3000/api/odata/v4/catalog/Books",
                 "settings": {
                     "defaultBindingMode": "TwoWay",
                     "defaultCountMode": "Inline"
