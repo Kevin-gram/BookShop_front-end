@@ -4,10 +4,17 @@
     xmlns:mvc="sap.ui.core.mvc">
 
     <Page
-        title="Books"
+        title="BookShop"
         id="mainPage">
         <content>
+            <SearchField
+                id="searchField"
+                placeholder="Search for books..."
+                liveChange="onSearch"
+                width="50%" />
             <Button text="Create Book" press="onCreateBookPress" />
+            <Button icon="sap-icon://sort" text="Sort by Price" press="onSortByPrice" />
+            <Button icon="sap-icon://sort" text="Sort by Currency" press="onSortByCurrency" />
             <Table
                 id="booksTable"
                 items="{
@@ -47,7 +54,13 @@
                             <Text text="{descr}" />
                             <Text text="{price}" />
                             <Text text="{currency_code}" />
-                            <Button text="Order" press="onOrderPress" />
+                            <HBox>
+                             <RatingIndicator
+                                    maxValue="3"
+                                    value="{rating}"
+                                    liveChange="onRatingChange" />
+                                <Button text="Order" press="onOrderPress" />
+                            </HBox>
                         </cells>
                     </ColumnListItem>
                 </items>

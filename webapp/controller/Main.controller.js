@@ -1,8 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageToast"
-], function (Controller, JSONModel, MessageToast) {
+    "sap/m/MessageToast",
+    "sap/ui/model/Sorter"
+], function (Controller, JSONModel, MessageToast, Sorter) {
     "use strict";
 
     return Controller.extend("bookshop.controller.Main", {
@@ -119,6 +120,20 @@ sap.ui.define([
             if (this._createBookDialog) {
                 this._createBookDialog.close();
             }
+        },
+
+        onSortByPrice: function () {
+            let  oTable = this.byId("booksTable");
+            let  oBinding = oTable.getBinding("items");
+            let  oSorter = new Sorter("price", false);  // Sort by price in ascending order
+            oBinding.sort(oSorter);
+        },
+
+        onSortByCurrency: function () {
+            let  oTable = this.byId("booksTable");
+            let  oBinding = oTable.getBinding("items");
+            let oSorter = new Sorter("currency_code", false);  // Sort by currency in ascending order
+            oBinding.sort(oSorter);
         }
     });
 });
