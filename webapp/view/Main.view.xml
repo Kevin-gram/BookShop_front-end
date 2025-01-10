@@ -18,7 +18,7 @@
             <Table
                 id="booksTable"
                 growing="true"
-                growingThreshold="10"
+                growingThreshold="13"
                 growingScrollToLoad="true"
                 items="{
                     path: '/value'

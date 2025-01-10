@@ -10,14 +10,21 @@ sap.ui.define([
 
     return Controller.extend("bookshop.controller.Main", {
         onInit: function () {
-            var oModel = new JSONModel();
+            var oModel = new JSONModel({
+                value: [],
+                skip: 0,
+                limit: 10
+            });
             this.getView().setModel(oModel);
             this._fetchBooks();
         },
 
         _fetchBooks: function () {
             var oModel = this.getView().getModel();
-            fetch("http://localhost:4004/odata/v4/catalog/Books")  // Direct link to the backend service
+            var iSkip = oModel.getProperty("/skip");
+            var iLimit = oModel.getProperty("/limit");
+
+            fetch(`http://localhost:4004/odata/v4/catalog/Books?$skip=${iSkip}&$top=${iLimit}`)  // Direct link to the backend service with pagination
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok ' + response.statusText);
@@ -25,7 +32,10 @@ sap.ui.define([
                     return response.json();
                 })
                 .then(data => {
-                    oModel.setData(data);
+                    var aBooks = oModel.getProperty("/value");
+                    aBooks = aBooks.concat(data.value);
+                    oModel.setProperty("/value", aBooks);
+                    oModel.setProperty("/skip", iSkip + iLimit);
                 })
                 .catch(error => {
                     console.error('There has been a problem with your fetch operation:', error);
@@ -108,7 +118,7 @@ sap.ui.define([
             })
             .then(data => {
                 MessageToast.show("Book created: " + data.title);
-                this._fetchBooks();  // Fetch the updated list of books
+                this._resetBooks();  // Reset the book list and fetch from the beginning
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
@@ -186,6 +196,13 @@ sap.ui.define([
             if (this._viewMoreDialog) {
                 this._viewMoreDialog.close();
             }
+        },
+
+        _resetBooks: function () {
+            var oModel = this.getView().getModel();
+            oModel.setProperty("/value", []);
+            oModel.setProperty("/skip", 0);
+            this._fetchBooks();
         }
     });
 });
