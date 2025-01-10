@@ -1,0 +1,14 @@
+.no-scrollbar {
+    overflow: hidden;
+}
+.search{
+    background-color: blue;
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}

@@ -5,13 +5,15 @@
 
     <Page
         title="BookShop"
-        id="mainPage">
+        id="mainPage"
+        class="no-scrollbar">
         <content>
             <SearchField
                 id="searchField"
                 placeholder="Search for books..."
                 liveChange="onSearch"
-                width="50%" />
+                width="50%"
+                class="search" />
             <Button text="Create Book" press="onCreateBookPress" />
             <Button icon="sap-icon://sort" text="Sort by Price" press="onSortByPrice" />
             <Button icon="sap-icon://sort" text="Sort by Currency" press="onSortByCurrency" />
