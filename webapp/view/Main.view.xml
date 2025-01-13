@@ -112,6 +112,8 @@
                 <Input id="newBookAuthorID" type="Number" />
                 <Label text="Genre ID" />
                 <Input id="newBookGenreID" type="Number" />
+                <Label text="Description" />
+                <Input id="newBookDescription" />
             </VBox>
         </content>
         <beginButton>

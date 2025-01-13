@@ -131,6 +131,7 @@ sap.ui.define([
             var sStock = parseInt(this.byId("newBookStock").getValue(), 10);
             var sAuthorID = parseInt(this.byId("newBookAuthorID").getValue(), 10);
             var sGenreID = parseInt(this.byId("newBookGenreID").getValue(), 10);
+            var sDescription = this.byId("newBookDescription").getValue();
 
             var oNewBook = {
                 title: sTitle,
@@ -138,7 +139,8 @@ sap.ui.define([
                 currency_code: sCurrency,
                 stock: sStock,
                 author_ID: sAuthorID,
-                genre_ID: sGenreID
+                genre_ID: sGenreID,
+                descr: sDescription
             };
 
             // Log the request data to the console
