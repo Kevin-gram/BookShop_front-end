@@ -4,14 +4,14 @@
     xmlns:mvc="sap.ui.core.mvc">
 
     <Page
-        title="{title}"
+        title="Book Detail"
         id="bookDetailPage">
         <content>
-            <VBox>
-                <Text text="{title}" class="sapUiSmallMarginBottom sapUiLargeMarginTop" />
-                <Text text="{descr}" class="sapUiSmallMarginBottom" />
-                <Text text="Author ID: {author_ID}" class="sapUiSmallMarginBottom" />
-                <Text text="Stock: {stock}" class="sapUiSmallMarginBottom" />
+            <VBox fitContainer="true">
+                <Text text="{/selectedBook/title}" class="sapUiSmallMarginBottom" />
+                <Text text="{/selectedBook/descrip}" class="sapUiSmallMarginBottom" />
+                <Text text="Author ID: {/selectedBook/author_ID}" class="sapUiSmallMarginBottom" />
+                <Text text="Stock: {/selectedBook/stock}" class="sapUiSmallMarginBottom" />
                 <Button text="Add to Cart" press="onAddToCartPress" />
             </VBox>
         </content>

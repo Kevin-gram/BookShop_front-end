@@ -14,7 +14,8 @@ sap.ui.define([
                 value: [],
                 skip: 0,
                 limit: 10,
-                orderStatus: ""
+                orderStatus: "",
+                selectedBook: {}
             });
             this.getView().setModel(oModel);
             this._fetchBooks();
@@ -37,6 +38,7 @@ sap.ui.define([
                     aBooks = aBooks.concat(data.value);
                     oModel.setProperty("/value", aBooks);
                     oModel.setProperty("/skip", iSkip + iLimit);
+                    console.log(data)
                 })
                 .catch(error => {
                     console.error('There has been a problem with your fetch operation:', error);

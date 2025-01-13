@@ -12,9 +12,30 @@ sap.ui.define([
 
         _onObjectMatched: function (oEvent) {
             var sBookId = oEvent.getParameter("arguments").bookId;
-            this.getView().bindElement({
-                path: "/value/" + sBookId
-            });
+            console.log("Book ID:", sBookId);  // Log the book ID
+            this._fetchBookDetails(sBookId);
+        },
+
+        _fetchBookDetails: function () {
+            var oModel = this.getView().getModel();
+            var sUrl = `http://localhost:3000/api/odata/v4/catalog/Books(${sBookId})`;
+            console.log("Fetch URL:", sUrl);  // Log the fetch URL
+
+            fetch(sUrl)  // Use proxy server
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Fetched Data:", data);  // Log the fetched data
+                    oModel.setProperty("/selectedBook", data);
+                    console.log("Model Updated:", oModel.getProperty("/selectedBook"));  // Log the updated model
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
         },
 
         onAddToCartPress: function () {
