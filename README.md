@@ -1,6 +1,45 @@
+# UI5 Application bookshop
 
+Insert the purpose of this project and some interesting info here...
 
+## Description
 
+This app demonstrates a setup for developing UI5 applications.
+
+## Requirements
+
+Either [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) for dependency management.
+
+## Preparation
+
+Use `npm` (or `yarn`) to install the dependencies:
+
+```sh
+npm install
+```
+
+(To use yarn, just do `yarn` instead.)
+
+## Run the App
+
+Execute the following command to run the app locally for development in watch mode (the browser reloads the app automatically when there are changes in the source code):
+
+```sh
+npm start
+```
+
+As shown in the terminal after executing this command, the app is then running on http://localhost:8080/index.html. A browser window with this URL should automatically open.
+
+(When using yarn, do `yarn start` instead.)
+
+## Build the App
+
+### Unoptimized (but quick)
+
+Execute the following command to build the project and get an app that can be deployed:
+
+```sh
+npm run build
 ```
 
 The result is placed into the `dist` folder. To start the generated package, just run
