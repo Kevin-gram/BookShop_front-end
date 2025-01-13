@@ -8,6 +8,7 @@
         id="bookDetailPage">
         <content>
             <VBox fitContainer="true">
+                <!-- Bind the selectedBook properties to the view -->
                 <Text text="{/selectedBook/title}" class="sapUiSmallMarginBottom" />
                 <Text text="{/selectedBook/descrip}" class="sapUiSmallMarginBottom" />
                 <Text text="Author ID: {/selectedBook/author_ID}" class="sapUiSmallMarginBottom" />
