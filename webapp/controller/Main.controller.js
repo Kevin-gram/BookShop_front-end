@@ -237,6 +237,17 @@ sap.ui.define([
             }
         },
 
+        onBookPress: function (oEvent) {
+            var oItem = oEvent.getSource();
+            var oContext = oItem.getBindingContext();
+            var oBook = oContext.getObject();
+
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("bookDetail", {
+                bookId: oBook.ID
+            });
+        },
+
         _resetBooks: function () {
             var oModel = this.getView().getModel();
             oModel.setProperty("/value", []);

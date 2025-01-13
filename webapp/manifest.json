@@ -75,12 +75,21 @@
                     "pattern": "",
                     "name": "main",
                     "target": "main"
+                },
+                 {
+                    "pattern": "bookDetail/{bookId}",
+                    "name": "bookDetail",
+                    "target": "bookDetail"
                 }
             ],
             "targets": {
                 "main": {
                     "viewId": "main",
                     "viewName": "Main"
+                },
+                "bookDetail": {
+                    "viewName": "BookDetail",
+                    "viewLevel": 2
                 }
             }
         }
