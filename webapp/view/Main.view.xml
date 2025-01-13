@@ -16,8 +16,9 @@
                     placeholder="Search for books..."
                     liveChange="onSearch"
                     width="50%" />
-                <HBox justifyContent="SpaceBetween">
                     <Button text="Create Book" press="onCreateBookPress" />
+                <HBox justifyContent="Center">
+                    
                     <Button icon="sap-icon://sort" text="Sort by Price" press="onSortByPrice" />
                     <Button icon="sap-icon://sort" text="Sort by Currency" press="onSortByCurrency" />
                 </HBox>
