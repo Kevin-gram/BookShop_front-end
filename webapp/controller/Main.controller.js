@@ -98,7 +98,7 @@ sap.ui.define([
             .then(data => {
                 MessageToast.show("Order placed successfully!");
                 oModel.setProperty("/orderStatus", "Order placed successfully!");
-                this._resetBooks();  // Reset the book list and fetch from the beginning
+                this.resetBooks();  // Reset the book list and fetch from the beginning
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
@@ -160,8 +160,8 @@ sap.ui.define([
                 return response.json();
             })
             .then(data => {
-                MessageToast.show("Book created: " + data.title);
-                this._resetBooks();  // Reset the book list and fetch from the beginning
+                // MessageToast.show("Book created: " + data.title);
+                this.resetBooks();  // Reset the book list and fetch from the beginning
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
@@ -252,7 +252,7 @@ sap.ui.define([
             });
         },
 
-        _resetBooks: function () {
+        resetBooks: function () {
             var oModel = this.getView().getModel();
             oModel.setProperty("/value", []);
             oModel.setProperty("/skip", 0);
