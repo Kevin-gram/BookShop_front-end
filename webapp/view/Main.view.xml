@@ -69,7 +69,7 @@
                         </ColumnListItem>
                     </items>
                 </Table>
-                <Label text="{/orderStatus}" visible="{= ${/orderStatus} !== '' }" />
+                <!-- <Label text="{/orderStatus}" visible="{= ${/orderStatus} !== '' }" /> -->
             </VBox>
         </content>
     </Page>
